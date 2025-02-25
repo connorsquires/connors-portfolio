@@ -461,6 +461,7 @@ span {
 
     .nav {
         padding: 16px 20px; /* Reduce padding for smaller screens */
+        z-index: 1;
     }
 
     .home__content {
@@ -469,7 +470,7 @@ span {
         padding: 40px 20px;
         align-items: center;
         margin-top: -225px;
-        z-index: -1;
+        z-index: 0;
     }
 
     .home__video {
