@@ -489,4 +489,8 @@ span {
         gap: 16px;
         z-index: 10;
     }
+
+    .home__links a {
+        pointer-events: auto;
+    }
 }
