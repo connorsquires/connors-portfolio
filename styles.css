@@ -6,18 +6,18 @@ body {
 
 @font-face {
     font-family: 'PP Neue Montreal';
-    src: url("https://connorknows.best/PPNeueMontreal-Regular.woff") format('woff');
+    src: url("PPNeueMontreal-Regular.woff") format('woff');
 }
 
 @font-face {
     font-family: 'PP Neue Montreal';
-    src: url("https://connorknows.best/PPNeueMontreal-Bold.woff") format('woff');
+    src: url("PPNeueMontreal-Bold.woff") format('woff');
     font-weight: bold;
 }
 
 @font-face {
     font-family: 'GT Maru';
-    src: url("https://connorknows.best/GTMaru-Medium.woff") format("woff");
+    src: url("GT-Maru-Medium.woff") format("woff");
     font-weight: 500;
 }
 
