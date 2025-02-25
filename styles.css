@@ -480,10 +480,12 @@ span {
         justify-content: center;
         align-items: center;
         margin-right: 0;
+        pointer-events: none;
     }
 
     .home__links {
         flex-direction: column;
         gap: 16px;
+        z-index: 1;
     }
 }
