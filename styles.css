@@ -481,11 +481,12 @@ span {
         align-items: center;
         margin-right: 0;
         pointer-events: none;
+        z-index: 0;
     }
 
     .home__links {
         flex-direction: column;
         gap: 16px;
-        z-index: 1;
+        z-index: 10;
     }
 }
