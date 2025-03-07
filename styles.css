@@ -330,7 +330,7 @@ span {
 }
 
 .timing__pill {
-    display: inline-flex;
+    display: flex;
     padding: 5px 10px;
     border-radius: 9999px;
     background: #BFE1F2;
