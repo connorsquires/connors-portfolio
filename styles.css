@@ -349,6 +349,7 @@ span {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.48px;
+    white-space: nowrap;
 }
 
 .listening__header {
