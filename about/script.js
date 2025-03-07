@@ -1,38 +1,16 @@
-const backendUrl = 'https://hidden-everglades-58171-9949524174bd.herokuapp.com/exchange-token';
-const refreshTokenUrl = 'https://hidden-everglades-58171-9949524174bd.herokuapp.com/refresh-token';
+// Replace with your manually fetched access token
+const accessToken = process.env.ACCESS_TOKEN; // This should be securely stored or set
+let tokenExpirationTime = Date.now() + 3600 * 1000; // Token expires in 1 hour
 
-let accessToken = '';
-let refreshToken = '';
-let tokenExpirationTime = 0; // Timestamp when the token expires
-
-// Function to fetch the access token
-async function fetchAccessToken(code) {
-  const response = await fetch(backendUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      code: code,
-      redirect_uri: 'https://connorknows.best/spotify-callback'
-    })
-  });
-
-  const data = await response.json();
-  accessToken = data.access_token;
-  refreshToken = data.refresh_token;
-  tokenExpirationTime = Date.now() + 3600 * 1000; // Token expires in 1 hour
-}
-
-// Function to refresh the access token
+// Function to refresh the access token (optional if you're manually refreshing it)
 async function refreshAccessToken() {
-  const response = await fetch(refreshTokenUrl, {
+  const response = await fetch('https://hidden-everglades-58171-9949524174bd.herokuapp.com/refresh-token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      refresh_token: refreshToken
+      refresh_token: process.env.REFRESH_TOKEN // Ensure you are passing the refresh token stored
     })
   });
 
@@ -61,38 +39,13 @@ async function fetchCurrentlyPlaying() {
   return await response.json();
 }
 
-// Function to fetch recently played tracks
-async function fetchRecentlyPlayed() {
-  if (Date.now() >= tokenExpirationTime) {
-    await refreshAccessToken(); // Refresh token if expired
-  }
-
-  const response = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`
-    }
-  });
-
-  const data = await response.json();
-  return data.items[0]; // Return the most recently played track
-}
-
 // Function to update the "Currently Listening" widget
 async function updateCurrentlyListening() {
   let trackData = await fetchCurrentlyPlaying();
 
   if (!trackData) {
-    // Fallback to recently played tracks if no track is currently playing
-    const recentlyPlayed = await fetchRecentlyPlayed();
-    if (recentlyPlayed) {
-      trackData = {
-        item: recentlyPlayed.track,
-        timestamp: new Date(recentlyPlayed.played_at).getTime()
-      };
-    } else {
-      console.log('No recently played tracks found.');
-      return;
-    }
+    console.log('No track currently playing.');
+    return;
   }
 
   // Update the DOM with the track data
@@ -115,24 +68,8 @@ async function updateCurrentlyListening() {
   }
 }
 
-// Function to handle the Spotify authorization flow
-function handleAuthorization() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const authorizationCode = urlParams.get('code');
-
-  if (authorizationCode) {
-    fetchAccessToken(authorizationCode)
-      .then(() => {
-        // Redirect the user back to the main page
-        window.location.href = 'https://connorknows.best';
-      })
-      .catch(error => console.error('Error fetching access token:', error));
-  }
-}
-
 // Initialize the widget
 function init() {
-  handleAuthorization(); // Handle the Spotify authorization flow
   updateCurrentlyListening(); // Update the widget with the currently playing track
   setInterval(updateCurrentlyListening, 60000); // Update every 60 seconds
 }
