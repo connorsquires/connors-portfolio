@@ -1,5 +1,5 @@
 // Replace with your manually fetched access token
-const accessToken = "BQCEbHRgR-oOpWuji8rsveOrQsZUwTgUmpgmuckAlvurf88rhPRo44GXAuubAgpIi9juK0Er-HcuU2irVtWrc-YhL65SIACc_hEvaG-nY8qTob9jdEUEK0W0EiOGpN-zb44iU3OAcTKpw8cBvp3wENzDWaY4LzEzw1zxirW1FAinxyrFHK4cd8qt5NDstWv793t3pkJh3mc_MlTO3ioYiN8iTXK4HjFXSTNZ5RptdYUFZA"; // This should be securely stored or set
+let accessToken = "BQCEbHRgR-oOpWuji8rsveOrQsZUwTgUmpgmuckAlvurf88rhPRo44GXAuubAgpIi9juK0Er-HcuU2irVtWrc-YhL65SIACc_hEvaG-nY8qTob9jdEUEK0W0EiOGpN-zb44iU3OAcTKpw8cBvp3wENzDWaY4LzEzw1zxirW1FAinxyrFHK4cd8qt5NDstWv793t3pkJh3mc_MlTO3ioYiN8iTXK4HjFXSTNZ5RptdYUFZA"; // This should be securely stored or set
 let tokenExpirationTime = Date.now() + 3600 * 1000; // Token expires in 1 hour
 
 // Function to refresh the access token (optional if you're manually refreshing it)
@@ -48,6 +48,11 @@ async function updateCurrentlyListening() {
     return;
   }
 
+  if (!trackData.item || !trackData.item.album || !trackData.item.album.images[0]) {
+    console.log('Track data is incomplete.');
+    return;
+  }
+
   // Update the DOM with the track data
   const albumImage = document.querySelector('.listening__album img');
   const albumName = document.querySelector('.album__name');
@@ -82,4 +87,4 @@ function init() {
 }
 
 // Run the initialization function when the page loads
-window.onload = updateCurrentlyListening;
+window.onload = init;
