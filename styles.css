@@ -354,6 +354,7 @@ span {
     white-space: nowrap;
     overflow: hidden; /* Hide any text that exceeds the max-width */
     text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .listening__header {
