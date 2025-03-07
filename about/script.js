@@ -1,5 +1,5 @@
 // Replace with your manually fetched access token
-const accessToken = process.env.ACCESS_TOKEN; // This should be securely stored or set
+const accessToken = "BQCEbHRgR-oOpWuji8rsveOrQsZUwTgUmpgmuckAlvurf88rhPRo44GXAuubAgpIi9juK0Er-HcuU2irVtWrc-YhL65SIACc_hEvaG-nY8qTob9jdEUEK0W0EiOGpN-zb44iU3OAcTKpw8cBvp3wENzDWaY4LzEzw1zxirW1FAinxyrFHK4cd8qt5NDstWv793t3pkJh3mc_MlTO3ioYiN8iTXK4HjFXSTNZ5RptdYUFZA"; // This should be securely stored or set
 let tokenExpirationTime = Date.now() + 3600 * 1000; // Token expires in 1 hour
 
 // Function to refresh the access token (optional if you're manually refreshing it)
@@ -10,7 +10,7 @@ async function refreshAccessToken() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      refresh_token: process.env.REFRESH_TOKEN // Ensure you are passing the refresh token stored
+      refresh_token: "AQDeKekduaUW3sycmM-MSkULYuHJ1gIWw19RT-lJCpRmI76RgRFQVChgFfW3IXF6qNKoOhPZ6-lWHv8ycNaZdKBrnkn21g-4EeZcy7LB7JrRyDF3KknkR_a7ZAz7H3nnXCo" // Ensure you are passing the refresh token stored
     })
   });
 
@@ -58,7 +58,13 @@ async function updateCurrentlyListening() {
   albumName.textContent = trackData.item.album.name; // Album name
   artistName.textContent = trackData.item.artists[0].name; // Artist name
 
+  const currentTime = Date.now();
+  const isPlayingNow = !trackData.timestamp || currentTime - trackData.timestamp < 60000; // Track is playing if played in the last minute
+
   // Calculate and display how long ago the track was played
+  if (isPlayingNow) {
+    playTime.textContent = 'Playing now';
+  } else {
   const minutesAgo = Math.floor((Date.now() - trackData.timestamp) / 60000);
   if (minutesAgo >= 60) {
     const hoursAgo = Math.floor(minutesAgo / 60);
@@ -66,6 +72,7 @@ async function updateCurrentlyListening() {
   } else {
     playTime.textContent = `${minutesAgo} minute${minutesAgo !== 1 ? 's' : ''} ago`;
   }
+}
 }
 
 // Initialize the widget
