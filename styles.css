@@ -339,6 +339,8 @@ span {
     max-height: 15px;
     max-width: 200px;
     white-space: nowrap;
+    overflow: hidden; /* Hide any text that exceeds the max-width */
+    text-overflow: ellipsis;
 }
 
 .timing__pill p {
@@ -350,6 +352,8 @@ span {
     line-height: normal;
     letter-spacing: -0.48px;
     white-space: nowrap;
+    overflow: hidden; /* Hide any text that exceeds the max-width */
+    text-overflow: ellipsis;
 }
 
 .listening__header {
