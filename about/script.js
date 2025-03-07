@@ -82,4 +82,4 @@ function init() {
 }
 
 // Run the initialization function when the page loads
-window.onload = init;
+window.onload = updateCurrentlyListening;
