@@ -62,16 +62,16 @@
                     <div class="listening__header">
                         <h2>Listening</h2>
                         <div class="timing__pill">
-                            <p class="play__time">My favorite album</p>
+                            <p class="play__time" id="play-time">My favorite album</p>
                         </div>
                     </div>
                     <div class="listening__content">
                         <div class="listening__album">
-                            <img src="../assets/images/MediumBuild-Country.jpeg" alt="Album cover for Country by Medium Build">
+                            <img id="album-cover" class="album__cover" src="" alt="Album cover for recently played song">
                         </div>
                         <div class="listening__info">
-                            <h3 class="album__name">Country</h3>
-                            <p class="artist__name">Medium Build</p>
+                            <h3 id="song-name" class="song__name">Loading song...</h3>
+                            <p id="artist-name" class="artist__name">Fetching artist...</p>
                         </div>
                     </div>
                 </div>
@@ -109,5 +109,6 @@
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
