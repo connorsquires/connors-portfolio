@@ -94,6 +94,7 @@ span {
 .home__video {
     flex: 0 0 350px;
     margin-right: 40px;
+    cursor: url("assets/images/Flame-Cursor.png"), auto; /* Custom cursor */
 }
 
 .home__video video {

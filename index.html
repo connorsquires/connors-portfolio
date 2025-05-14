@@ -26,13 +26,13 @@
     <div class="home" id="home">
         <div class="home__content">
             <div class="home__video">
-                <video autoplay muted loop playsinline>
+                <video id="clayVideo" autoplay muted loop playsinline>
                     <source src="assets/images/claymation.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="home__text">
                 <h1><span>Connor Squires</span> crafts delightful digital products at the intersection of creativity and user experience, and he is totally fine* </h1>
-                <p>*I'm in the process of learning Javascript and building a fully functional website. For now, we’re keeping it lo-fi. Click the links below to open a PDF and explore my past work.</p>
+                <p>*I'm in the process of learning Javascript and building a fully functional website. For now, we're keeping it lo-fi. Click the links below to open a PDF and explore my past work.</p>
                 <div class="home__links">
                     <a href="assets/pdfs/Figo-PDF.pdf" target="_blank">
                         <img src="assets/images/Icon-PDF.svg" alt="PDF icon" class="link__icon">
@@ -67,5 +67,26 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('clayVideo');
+            const videoContainer = document.querySelector('.home__video');
+
+            videoContainer.addEventListener('mouseenter', () => {
+                if (video.paused) {
+                    video.play();
+                }
+            });
+
+            videoContainer.addEventListener('mouseleave', () => {
+                if (!video.paused) {
+                    video.pause();
+                }
+            });
+
+            // Initially pause the video
+            video.pause();
+        });
+    </script>
 </body>
 </html>
